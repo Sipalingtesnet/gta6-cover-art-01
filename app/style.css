@@ -1,0 +1,160 @@
+/* VICE HEAT editor: dark neon chrome around a bright poster preview. */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #12081a;
+  color: #f2e9f5;
+  font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 2px solid #ff2e88;
+  background: linear-gradient(90deg, #1c0f22, #2b0f2e 60%, #12081a);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 0.14em;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(255, 46, 136, 0.65), 3px 3px 0 #ff7a3d;
+}
+
+.topbar .sub { margin: 2px 0 0; color: #d9c2e0; font-size: 13px; }
+.badge {
+  margin: 0;
+  padding: 4px 10px;
+  border: 1px solid #00e5ff;
+  border-radius: 999px;
+  color: #00e5ff;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 18px;
+  padding: 18px 20px 28px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.stage { min-width: 0; }
+#preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 190px);
+  object-fit: contain;
+  background: #f6efe4;
+  border: 2px solid #3a2340;
+  border-radius: 6px;
+  cursor: grab;
+  touch-action: none;
+}
+#preview:active { cursor: grabbing; }
+
+#status {
+  margin: 10px 0 0;
+  padding: 8px 12px;
+  background: #1c0f22;
+  border: 1px solid #3a2340;
+  border-radius: 6px;
+  color: #ffd9ec;
+  font-size: 14px;
+}
+
+.controls section {
+  margin-bottom: 18px;
+  padding: 14px;
+  background: #1c0f22;
+  border: 1px solid #3a2340;
+  border-radius: 8px;
+}
+.controls h2 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffb3d1;
+}
+.controls label { display: block; margin-bottom: 10px; font-size: 14px; }
+.controls input[type="text"] {
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1px solid #5b3a66;
+  border-radius: 6px;
+  background: #12081a;
+  color: #fff;
+  font-size: 15px;
+}
+.controls input[type="range"] { width: 100%; accent-color: #ff2e88; }
+.controls input[type="file"] { display: block; margin-top: 4px; font-size: 13px; }
+
+.row { display: flex; gap: 8px; }
+.row > * { flex: 1; }
+
+button {
+  padding: 8px 12px;
+  border: 1px solid #5b3a66;
+  border-radius: 6px;
+  background: #2b0f2e;
+  color: #f2e9f5;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover { border-color: #ff2e88; }
+button.active {
+  background: #ff2e88;
+  border-color: #ff2e88;
+  color: #fff;
+  font-weight: 700;
+}
+button.export {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: linear-gradient(90deg, #ff7a3d, #ff2e88);
+  border: none;
+  color: #fff;
+}
+button.export:hover { filter: brightness(1.12); }
+
+.picks { display: flex; flex-wrap: wrap; gap: 8px; }
+.picks .pick { flex: 1 1 auto; }
+.hint { margin: 8px 0 0; color: #b99cc4; font-size: 13px; }
+.panel-name { margin: 0 0 8px; font-weight: 700; color: #00e5ff; }
+.radio { display: inline-flex !important; align-items: center; gap: 6px; margin-right: 14px; }
+
+/* Screenshot mode: the exported cover fills the window, chrome hidden. */
+body.shot-cover { background: #000; }
+body.shot-cover .topbar,
+body.shot-cover .app { display: none; }
+body.shot-cover #shot-canvas {
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 760px) {
+  .app { grid-template-columns: 1fr; }
+  .topbar { flex-wrap: wrap; }
+  #preview { max-height: none; }
+}
